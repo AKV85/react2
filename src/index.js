@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 ReactDOM.render(
-    <div>
-Some text
-        <button>Push me
-        </button>
-    </div>,
+   React.createElement('button', {
+disabled:true
+   }, 'Push me!!!'),
     document.getElementById("root")
 );
 
