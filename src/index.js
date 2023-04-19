@@ -4,8 +4,8 @@ import './index.css';
 
 ReactDOM.render(
    React.createElement('button', {
-disabled:true
-   }, 'Push me!!!'),
+    onClick: () => console.log('CLICK')
+}, 'Push me!!!'),
     document.getElementById("root")
 );
 
