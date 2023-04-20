@@ -4,6 +4,7 @@ import PostItem from "./components/PostItem"
 import PostList from './components/PostList';
 import MyButton from './components/UI/buttons/MyButton';
 import MyInput from './components/UI/inputs/MyInput';
+import PostForm from './components/PostForm';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -13,35 +14,13 @@ function App() {
     { id: 4, title: "Python", body: "Description" },
   ])
 
-  const [post, setPost] = useState({title: "", body: ""})
-
-  const addNewPost = (e) => {
-    e.preventDefault()
-    setPosts ([...posts, {...post, id: Date.now()}])
-    setPost({title: "", body: ""})
-  }
+const createPost =(newPost) => {
+  setPosts([...posts, newPost])
+}
 
   return (
     <div className="App">
-      <form>
-        {/*Controlled component */}
-        <MyInput
-          value={post.title}
-          onChange={e => setPost({...post, title: e.target.value})}
-          type="text"
-          placeholder="Post name"
-        />
-
-        <MyInput
-          value={post.body}
-          onChange={e => setPost({...post, body: e.target.value})}
-          type="text"
-          placeholder="Description"
-        />
-        <MyButton onClick={addNewPost}>
-          Create post
-        </MyButton>
-      </form>
+      <PostForm create={createPost} />
       <PostList posts={posts} title={"Posts list-1"} />
 
 
@@ -49,3 +28,4 @@ function App() {
   )
 }
 export default App;
+
