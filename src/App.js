@@ -14,6 +14,8 @@ function App() {
     { id: 4, title: "Python", body: "Description" },
   ])
 
+  const [selectedSort, setSelectedSort] = useState('')
+
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
   }
@@ -22,12 +24,20 @@ function App() {
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    console.log(sort)
+  }
+
   return (
     <div className="App">
       <PostForm create={createPost} />
       <hr style={{margin: "15px 0" }} />
       <div>
         <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
           defaultValue="Sort"
           options={[
             {value: 'title', name: "By name"},
