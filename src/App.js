@@ -23,6 +23,9 @@ function App() {
     body
    }
     setPosts ([...posts, newPost])
+    setTitle("")
+    setBody("")
+
   }
 
   return (
