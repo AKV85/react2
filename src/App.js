@@ -22,7 +22,7 @@ function App() {
     title,
     body
    }
-   console.log(newPost);
+    setPosts ([...posts, newPost])
   }
 
   return (
