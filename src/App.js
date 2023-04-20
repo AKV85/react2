@@ -21,11 +21,15 @@ function App() {
 
   const sortedPosts = useMemo(() => {
     console.log("norma")
-    if(selectedSort) {
+    if (selectedSort) {
       return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
     }
     return posts;
   }, [selectedSort, posts])
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter(post =>post.title.includes(searchQuery))
+  }, [searchQuery,sortedPosts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -47,7 +51,7 @@ function App() {
       <div>
         <MyInput
           value={searchQuery}
-          onChange ={e => setSearchQuery(e.target.value)}
+          onChange={e => setSearchQuery(e.target.value)}
           placeholder="Search..."
 
         />
@@ -65,7 +69,7 @@ function App() {
       </div>
       {posts.length !== 0
         ?
-        <PostList remove={removePost} posts={sortedPosts} title={"Posts list-1"} />
+        <PostList remove={removePost} posts={sortedAndSearchedPosts} title={"Posts list-1"} />
         :
         <h1 style={{ textAlign: 'center' }}>
           No posts find
