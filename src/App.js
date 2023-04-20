@@ -14,10 +14,11 @@ function App() {
   ])
 
   const [title, setTitle] = useState('')
-
+  const bodyInputRef = useRef();
   const addNewPost = (e) => {
       e.preventDefault()
       console.log(title)
+      console.log(bodyInputRef.current.value)
   }
 
   return (
@@ -30,7 +31,11 @@ function App() {
           type="text"
           placeholder="Post name"
         />
-        <MyInput type="text" placeholder="Post description" />
+
+        <MyInput 
+            ref = {bodyInputRef}
+            type="text" 
+            placeholder="Post description" />
         <MyButton onClick={addNewPost}>
           Create post
         </MyButton>
