@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import MyInput from "./UI/inputs/MyInput";
 import MyButton from "./UI/buttons/MyButton";
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 
 const PostForm = ({create}) => {
     const [post, setPost] = useState({ title: "", body: "" })

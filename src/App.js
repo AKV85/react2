@@ -26,7 +26,11 @@ const removePost = (post) => {
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList remove={removePost} posts={posts} title={"Posts list-1"} />
+      {posts.length !== 0}
+      ? <PostList remove={removePost} posts={posts} title={"Posts list-1"} />
+      : <div>No posts find</div>
+
+
 
 
     </div>
