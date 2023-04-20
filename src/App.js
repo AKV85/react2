@@ -8,10 +8,10 @@ import PostForm from './components/PostForm';
 import MySelect from './components/UI/selects/MySelect';
 function App() {
   const [posts, setPosts] = useState([
-    { id: 1, title: "JS", body: "Description" },
-    { id: 2, title: "PHP", body: "Description" },
-    { id: 3, title: "Java", body: "Description" },
-    { id: 4, title: "Python", body: "Description" },
+    { id: 1, title: "JS", body: "aaa" },
+    { id: 2, title: "PHP", body: "ccc" },
+    { id: 3, title: "Java", body: "bb" },
+    { id: 4, title: "Python", body: "a1" },
   ])
 
   const [selectedSort, setSelectedSort] = useState('')
@@ -27,7 +27,7 @@ function App() {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
-    console.log(sort)
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
   }
 
   return (
