@@ -13,12 +13,25 @@ function App() {
     { id: 4, title: "Python", body: "Description" },
   ])
 
+  const [title, setTitle] = useState('')
+
+  const addNewPost = (e) => {
+      e.preventDefault()
+      console.log(title)
+  }
+
   return (
     <div className="App">
       <form>
-        <MyInput type="text" placeholder="Post name" />
+        {/*Controlled component */}
+        <MyInput
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          type="text"
+          placeholder="Post name"
+        />
         <MyInput type="text" placeholder="Post description" />
-        <MyButton>
+        <MyButton onClick={addNewPost}>
           Create post
         </MyButton>
       </form>
