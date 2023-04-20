@@ -17,7 +17,7 @@ function App() {
       <form>
         <input type="text" placeholder="post name" />
         <input type="text" placeholder="Post description" />
-        <MyButton>
+        <MyButton disabled>
           Create post
         </MyButton>
       </form>
