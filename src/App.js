@@ -12,14 +12,17 @@ import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './components/hooks/UsePosts';
 import PostService from './API/PostService';
 import Loader from './components/UI/loaders/Loader';
+import { useFetching } from './components/hooks/UseFetching';
 
 function App() {
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({ sort: "", query: "" })
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
-
+  const [fetchPosts, isPostsLoading, postError ] = useFetching(async () => {
+    const posts = await PostService.getAll();
+    setPosts(posts)
+  })
 
 
   useEffect(() => {
@@ -29,15 +32,6 @@ function App() {
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
     setModal(false)
-  }
-
-  async function fetchPosts() {
-    setIsPostsLoading(true);
-    setTimeout(async () => {
-      const posts = await PostService.getAll();
-      setPosts(posts)
-      setIsPostsLoading(false);
-    }, 1000)
   }
 
   //had post from children component
@@ -67,7 +61,7 @@ function App() {
 
       {isPostsLoading
         ?
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
           <Loader />
         </div>
         :
