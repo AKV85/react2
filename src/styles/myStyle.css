@@ -19,7 +19,7 @@
     border: 2px solid teal;
     margin-top: 15px;
     justify-content: space-between;
-    align-posts: center;
+    align-items: center;
 }
 
 .remove-btn {
@@ -27,16 +27,18 @@
   }
   
   .post-enter {
-    opacity: 0;
+    transform: translateX(-100%);
   }
   .post-enter-active {
-    transform: translateX(358px);
-    transition: opacity 500ms ease-in;
+    transform: translateX(0%);
+    transition: opacity 500ms ease-in, transform 500ms;;
   }
   .post-exit {
     opacity: 1;
+    transform: translateX(0%);
   }
   .post-exit-active {
-    transform: translateX(-358px);
-    transition: opacity 500ms ease-in;
+    transform: translateX(-100%);
+    transition: opacity 500ms ease-in, transform 500ms;
+
   }
