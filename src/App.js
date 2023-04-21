@@ -10,7 +10,7 @@ import PostFilter from './components/PostFilter';
 import MyModal from './components/modals/MyModal';
 import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './components/hooks/UsePosts';
-import axios from 'axios';
+import PostService from './API/PostService';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -34,8 +34,8 @@ fetchPosts()
   }
 
   async function fetchPosts() {
-    const response = await axios.get(' https://jsonplaceholder.typicode.com/posts')
-    setPosts(response.data)
+    const posts = await PostService.getAll();
+    setPosts(posts)
   }
 
   //had post from children component
