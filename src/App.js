@@ -11,6 +11,7 @@ import MyModal from './components/modals/MyModal';
 import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './components/hooks/UsePosts';
 import PostService from './API/PostService';
+import Loader from './components/UI/loaders/Loader';
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -66,7 +67,9 @@ function App() {
 
       {isPostsLoading
         ?
-        <h1>Loading...</h1>
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+          <Loader />
+        </div>
         :
         <PostList
           remove={removePost}
