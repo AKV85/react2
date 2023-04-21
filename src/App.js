@@ -8,6 +8,7 @@ import PostForm from './components/PostForm';
 // import MySelect from './components/UI/selects/MySelect';
 import PostFilter from './components/PostFilter';
 import MyModal from './components/modals/MyModal';
+import MyButton from './components/UI/buttons/MyButton';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -18,6 +19,7 @@ function App() {
   ])
 
   const [filter, setFilter] = useState({ sort: "", query: "" })
+  const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -32,6 +34,7 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setModal(false)
   }
 
   //had post from children component
@@ -41,7 +44,10 @@ function App() {
 
   return (
     <div className="App">
-      <MyModal visible={true}>
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
+        Create post
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
         <PostForm
           create={createPost}
         />
