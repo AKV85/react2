@@ -13,19 +13,16 @@ import { usePosts } from './components/hooks/UsePosts';
 import PostService from './API/PostService';
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, title: "JS", body: "aaa" },
-    { id: 2, title: "PHP", body: "ccc" },
-    { id: 3, title: "Java", body: "bb" },
-    { id: 4, title: "Python", body: "a1" },
-  ])
-
+  const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({ sort: "", query: "" })
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
 
-  useEffect(()=> {
-fetchPosts()
+
+
+  useEffect(() => {
+    fetchPosts()
   }, [])
 
   const createPost = (newPost) => {
@@ -34,8 +31,12 @@ fetchPosts()
   }
 
   async function fetchPosts() {
-    const posts = await PostService.getAll();
-    setPosts(posts)
+    setIsPostsLoading(true);
+    setTimeout(async () => {
+      const posts = await PostService.getAll();
+      setPosts(posts)
+      setIsPostsLoading(false);
+    }, 1000)
   }
 
   //had post from children component
@@ -63,11 +64,16 @@ fetchPosts()
         setFilter={setFilter}
       />
 
-      <PostList
-        remove={removePost}
-        posts={sortedAndSearchedPosts}
-        title={"Posts list-1"}
-      />
+      {isPostsLoading
+        ?
+        <h1>Loading...</h1>
+        :
+        <PostList
+          remove={removePost}
+          posts={sortedAndSearchedPosts}
+          title={"Posts list-1"}
+        />
+      }
     </div>
   )
 }
