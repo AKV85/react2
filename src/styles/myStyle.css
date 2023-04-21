@@ -44,5 +44,15 @@
 .post-exit-active {
     transform: translateX(-100%);
     transition: opacity 500ms ease-in, transform 500ms;
+}
 
+.page__wrapper {
+    margin-top: 30px;
+    display: flex;
+}
+
+.page {
+    padding: 10px;
+    border: 1px solid teal;
+    cursor: pointer;
 }
