@@ -85,6 +85,7 @@ function App() {
       <div className="page__wrapper">
         {pagesArray.map(p =>
           <span 
+            onClick = {() => setpage(p)}
             key={p} 
             className={page === p 
             ? 
