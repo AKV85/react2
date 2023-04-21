@@ -3,10 +3,11 @@ import "./styles/myStyle.css";
 // import PostItem from "./components/PostItem";
 import PostList from './components/PostList';
 // import MyButton from './components/UI/buttons/MyButton';
-import MyInput from './components/UI/inputs/MyInput';
+// import MyInput from './components/UI/inputs/MyInput';
 import PostForm from './components/PostForm';
-import MySelect from './components/UI/selects/MySelect';
+// import MySelect from './components/UI/selects/MySelect';
 import PostFilter from './components/PostFilter';
+import MyModal from './components/modals/MyModal';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -40,13 +41,18 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
+      <MyModal></MyModal>
+      <PostForm
+        create={createPost}
+      />
       <hr style={{ margin: "15px 0" }} />
-      <PostFilter filter={filter}
+      <PostFilter
+        filter={filter}
         setFilter={setFilter}
       />
 
-      <PostList remove={removePost}
+      <PostList
+        remove={removePost}
         posts={sortedAndSearchedPosts}
         title={"Posts list-1"}
       />
