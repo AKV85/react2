@@ -21,7 +21,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [page, setpage] = useState(1);
+  const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   let pagesArray = getPagesArray(totalPages);
 
@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [page])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -44,6 +44,11 @@ function App() {
   //had post from children component
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
+  }
+
+  const changePage = (page) => {
+    setPage(page)
+    
   }
 
   return (
@@ -85,7 +90,7 @@ function App() {
       <div className="page__wrapper">
         {pagesArray.map(p =>
           <span 
-            onClick = {() => setpage(p)}
+            onClick = {() =>changePage(p)}
             key={p} 
             className={page === p 
             ? 
