@@ -19,5 +19,24 @@
     border: 2px solid teal;
     margin-top: 15px;
     justify-content: space-between;
-    align-items: center;
+    align-posts: center;
 }
+
+.remove-btn {
+    margin-right: 0.5rem;
+  }
+  
+  .post-enter {
+    opacity: 0;
+  }
+  .post-enter-active {
+    transform: translateX(358px);
+    transition: opacity 500ms ease-in;
+  }
+  .post-exit {
+    opacity: 1;
+  }
+  .post-exit-active {
+    transform: translateX(-358px);
+    transition: opacity 500ms ease-in;
+  }
