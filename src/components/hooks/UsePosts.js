@@ -1,15 +1,15 @@
-import {useMemo} from "react";
+import { useMemo } from "react";
 
 
-export const useSortedPosts=(posts, sort) => {
+export const useSortedPosts = (posts, sort) => {
     const sortedPosts = useMemo(() => {
         if (sort) {
-          return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
+            return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
         }
         return posts;
-      }, [sort, posts])
+    }, [sort, posts])
 
-      return sortedPosts;
+    return sortedPosts;
 }
 
 export const usePosts = (posts, sort, query) => {
@@ -17,6 +17,6 @@ export const usePosts = (posts, sort, query) => {
 
     const sortedAndSearchedPosts = useMemo(() => {
         return sortedPosts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()))
-      }, [query, sortedPosts])
-      return sortedAndSearchedPosts;
+    }, [query, sortedPosts])
+    return sortedAndSearchedPosts;
 };
