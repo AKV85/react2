@@ -16,7 +16,7 @@ function App() {
     { id: 4, title: "Python", body: "a1" },
   ])
 
-  const [filter,setFilter] = useState({sort: "", query: ""})
+  const [filter, setFilter] = useState({ sort: "", query: "" })
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -42,15 +42,14 @@ function App() {
     <div className="App">
       <PostForm create={createPost} />
       <hr style={{ margin: "15px 0" }} />
-      <PostFilter filter={filter} setFilter={setFilter}/>
-      {sortedAndSearchedPosts.length 
-        ?
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title={"Posts list-1"} />
-        :
-        <h1 style={{ textAlign: 'center' }}>
-          No posts find
-        </h1>
-      }
+      <PostFilter filter={filter}
+        setFilter={setFilter}
+      />
+
+      <PostList remove={removePost}
+        posts={sortedAndSearchedPosts}
+        title={"Posts list-1"}
+      />
     </div>
   )
 }
