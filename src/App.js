@@ -24,7 +24,6 @@ function App() {
     setPosts(posts)
   })
 
-
   useEffect(() => {
     fetchPosts()
   }, [])
@@ -58,6 +57,10 @@ function App() {
         filter={filter}
         setFilter={setFilter}
       />
+
+      {postError && 
+        <h1>There is a mistake ${postError}</h1>
+      } 
 
       {isPostsLoading
         ?
