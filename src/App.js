@@ -1,6 +1,6 @@
 import React from 'react';
 import "./styles/myStyle.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,Link } from 'react-router-dom';
 import About from './pages/About';
 import Posts from './pages/Posts'
 
@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
     <div className="navbar">
       <div slassName="navbar__links">
-        <a href="/about">About site</a>
-        <a href="/posts">Posts</a>
+        <Link to="/about">About site</Link>
+        <Link to="/posts">Posts</Link>
       </div>
     </div>
       <Routes>
