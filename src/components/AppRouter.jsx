@@ -3,24 +3,32 @@ import { Navigate, Routes, Route } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../router';
 
 const AppRouter = () => {
+    const isAuth = true;
     return (
-        <Routes>
-            {privateRoutes.map((route) => (
-                <Route
-                    key={route.path}
-                    element={route.element}
-                    path={route.path}
-                />
-            ))}
-               {publicRoutes.map((route) => (
-                <Route
-                    key={route.path}
-                    element={route.element}
-                    path={route.path}
-                />
-            ))}
+        isAuth
+            ?
+            <Routes>
+                {privateRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        element={route.element}
+                        path={route.path}
+                    />
+                ))}
+                <Route path="*" element={<Navigate to="/posts" />} />
+            </Routes>
+            :
+            <Routes>
+                {publicRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        element={route.element}
+                        path={route.path}
+                    />
+                ))}
+                <Route path="*" element={<Navigate to="/login" />} />
+            </Routes>
 
-        </Routes>
     );
 }
 
