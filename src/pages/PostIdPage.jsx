@@ -21,8 +21,8 @@ const PostIdPage = () => {
     useEffect(() => {
         fetchPostById(params.id)
         fetchComments(params.id)
+    }, []);
 
-    })
     return (
         <div>
             <h1>You are on post Id page with ID = {params.id}</h1>
@@ -38,7 +38,8 @@ const PostIdPage = () => {
                 <Loader />
                 :
                 <div>{comments.map(comm =>
-                    <div style={{ marginTop: '15px' }}>
+                    <div key={comm.id}
+                        style={{ marginTop: '15px' }}>
                         <h5>
                             {comm.email}
                         </h5>
