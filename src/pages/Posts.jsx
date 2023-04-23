@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import "../styles/myStyle.css";
 import PostList from '../components/PostList';
 import PostForm from '../components/PostForm';
@@ -21,17 +21,22 @@ function Posts() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const lastElement = useRef()
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
-    setPosts(response.data)
+    setPosts([...posts, ...response.data])
     const totalCount = response.headers['x-total-count']
     setTotalPages(getPageCount(totalCount, limit));
   })
 
   useEffect(() => {
-    fetchPosts(limit, page)
+
   }, [])
+
+  useEffect(() => {
+    fetchPosts(limit, page)
+  }, [page])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -45,7 +50,7 @@ function Posts() {
 
   const changePage = (page) => {
     setPage(page)
-    fetchPosts(limit, page)
+
 
   }
 
@@ -72,18 +77,19 @@ function Posts() {
       {postError &&
         <h1>There is a mistake ${postError}</h1>
       }
+      <PostList
+        remove={removePost}
+        posts={sortedAndSearchedPosts}
+        title={"Posts list-1"}
+      />
+      <div style={{ height: 20, background: 'red' }}>
 
-      {isPostsLoading
-        ?
+      </div>
+      {isPostsLoading &&
+
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
           <Loader />
         </div>
-        :
-        <PostList
-          remove={removePost}
-          posts={sortedAndSearchedPosts}
-          title={"Posts list-1"}
-        />
       }
       <Pagination
         page={page}
