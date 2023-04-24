@@ -22,6 +22,7 @@ function Posts() {
   const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   const lastElement = useRef()
+  const observer = useRef()
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
@@ -31,7 +32,13 @@ function Posts() {
   })
 
   useEffect(() => {
-
+    var callback = function (entries, observer) {
+      if (entries[0].isIntersecting) {
+        setPage(page + 1)
+      }
+    };
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(lastElement.current)
   }, [])
 
   useEffect(() => {
@@ -82,7 +89,9 @@ function Posts() {
         posts={sortedAndSearchedPosts}
         title={"Posts list-1"}
       />
-      <div style={{ height: 20, background: 'red' }}>
+      <div
+        ref={lastElement}
+        style={{ height: 20, background: 'red' }}>
 
       </div>
       {isPostsLoading &&
